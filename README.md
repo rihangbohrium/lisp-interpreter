@@ -2,6 +2,8 @@
 Object-less implementation of a lisp-language interpreter.
 Uses the concept of the eval/apply mutual recursion structure (even though python does not allow circular imports), and Read-Eval-Print-Loop interpreter.
 
+!(Eval and Apply recursion)[https://evalapply.space/images/evalapply.jpeg]
+
 # After cloning on mac/linux:
 ```
 bash init.sh
