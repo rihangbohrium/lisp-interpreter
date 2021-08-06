@@ -12,7 +12,7 @@ def add(ops, symbols=None):
     return sum(ops)
 
 def subtract(ops, symbols=None):
-    eval_all(ops)
+    eval_all(ops, symbols)
     return ops[0] - sum(ops[1:])
 
 def multiply(ops, symbols=None):
