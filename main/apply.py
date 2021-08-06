@@ -36,13 +36,9 @@ def define(ops, symbols):
 
 global_symbols = {'$parent' : None, 
                 '$': lambda x : 5,
-                'add': add,
                 '+': add,
-                'sub': subtract,
                 '-': subtract,
-                'mul': multiply,
                 '*': multiply,
-                'divide': divide,
                 '/': divide,
                 'define': define
                 }
