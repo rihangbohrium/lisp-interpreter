@@ -1,4 +1,5 @@
 from eval import evaluate
+import utils
 
 def get_globals():
     return global_symbols
@@ -29,10 +30,31 @@ def divide(ops, symbols=None):
         r /= i
     return r
 
-def define(ops, symbols):
-    assert type(ops[0]) == str
+def define(ops, symbols):            
+    assert type(ops[0]) == str, print(ops)
+    assert utils.valid_name(ops[0]), f'Name not valid: {ops[0]}'
     symbols[ops[0]] = evaluate(ops[1], symbols)
-    return ops[0]
+    return str(ops[0])
+
+def lisp_lambda(ops, symbols):
+    """
+    We do be dynamic scoping xDDDDDD
+    """
+    declared_scope = {'$parent':symbols}
+    vars = ops[0]
+    def when_called(args, sym=None, get_args=False):
+        if get_args:
+            return ops[0]
+        assert len(ops[0]) == len(args)
+        for i in range(len(args)):
+            # evaluate arguments in scope where function is called
+            # define scope where function was defined (ie new_scope)
+            define([vars[i], args[i]], sym)
+        for expr in ops[1:]:
+            evaluate(expr, sym)
+        return evaluate(ops[-1], sym)
+
+    return when_called
 
 global_symbols = {'$parent' : None, 
                 '$': lambda x : 5,
@@ -40,5 +62,6 @@ global_symbols = {'$parent' : None,
                 '-': subtract,
                 '*': multiply,
                 '/': divide,
-                'define': define
+                'define': define,
+                'lambda':lisp_lambda
                 }

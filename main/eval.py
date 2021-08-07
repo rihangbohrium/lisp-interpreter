@@ -1,10 +1,11 @@
 from utils import *
 
 """
-Evaluate and apply internal representation.
+Evaluate internal representation and apply methods within scope.
 """
 def search(symbols, symbol):
     parent = symbols['$parent']
+    assert type(symbol) != list, print(symbol)
     if symbol in symbols.keys():
         return True 
     elif parent is not None:
@@ -27,10 +28,13 @@ def evaluate(s, symbols):
         return get(symbols, s)
     elif type(s) == list:
         name = s[0]
+        if type(name) == list:
+            name = evaluate(name, symbols)
         operands = s[1:]
         if search(symbols, name):
             func = get(symbols, name)
-            return func(operands, symbols)
+            symbols['$last'] = func(operands, symbols)
+            return symbols['$last']
         else:
             raise NameError(f'name not found: {name}')
     return s
