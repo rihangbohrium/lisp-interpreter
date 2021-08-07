@@ -1,6 +1,6 @@
 # lisp-interpreter
 Object-less implementation of a lisp-language interpreter.
-Uses the concept of the eval/apply mutual recursion structure (even though python does not allow circular import), and Read-Eval-Print-Loop interpreter.
+Uses the concept of the eval/apply mutual recursion structure, and Read-Eval-Print-Loop interpreter.
 
 ![Eval and Apply recursion](https://evalapply.space/images/evalapply.jpeg)
 
