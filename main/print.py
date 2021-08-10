@@ -1,4 +1,3 @@
-from apply import lisp_lambda
 from utils import is_num
 import types
 
@@ -7,8 +6,12 @@ Print portion of read-eval-print loop
 """
 def print_repr(s):
     """
-    get python list representation, return as string
+    Convert internal representation back to lisp code.
     """
+    if s is None:
+        return 'nil'
+    if isinstance(s, bool):
+        return '#t' if s else '#f'
     if is_num(s):
         return str(s)
     if isinstance(s, str):

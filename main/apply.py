@@ -1,12 +1,25 @@
 from eval import evaluate
 import utils
 
+"""
+The apply part of eval-apply recursion construct. Contains python implementation for the
+Lisp builtin procedures. Because python does not allow circular imports, this file 
+imports eval.py, but eval.py does not import this, instead accessing these functions
+from global_symbols dict. 
+"""
+
 def get_globals():
     return global_symbols
 
 def eval_all(ops, symbols):
     for i in range(len(ops)):
         ops[i] = evaluate(ops[i], symbols)
+
+# Built-in Functions
+
+def equals(ops, symbols):
+    eval_all(ops, symbols)
+    return ops[0] == ops[1]
 
 def add(ops, symbols=None):
     eval_all(ops, symbols)
@@ -49,19 +62,37 @@ def lisp_lambda(ops, symbols):
         for i in range(len(args)):
             # evaluate arguments in scope where function is called
             # define scope where function was defined (ie new_scope)
-            define([vars[i], args[i]], sym)
+            if not utils.is_num(vars[i]):
+                define([vars[i], args[i]], sym)
         for expr in ops[1:]:
             evaluate(expr, sym)
         return evaluate(ops[-1], sym)
-
     return when_called
 
+def lisp_if(ops, symbols):
+    if evaluate(ops[0], symbols):
+        return evaluate(ops[1], symbols)
+    return evaluate(ops[2], symbols)
+
+def lisp_cond(ops, symbols):
+    for expr in ops:
+        if evaluate(expr[0], symbols):
+            return evaluate(expr[1], symbols)
+        
+
 global_symbols = {'$parent' : None, 
+                '#t': True,
+                '#f': False,
+                'nil': None,
+                'else': True,
                 '$': lambda x : 5,
+                '=': equals,
                 '+': add,
                 '-': subtract,
                 '*': multiply,
                 '/': divide,
                 'define': define,
-                'lambda':lisp_lambda
+                'lambda':lisp_lambda,
+                'if': lisp_if,
+                'cond': lisp_cond
                 }
