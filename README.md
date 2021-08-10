@@ -12,5 +12,5 @@ rb-lisp
 
 # After cloning on windows:
 ```
-python main/loop.py
+python main/interpreter.py
 ```
