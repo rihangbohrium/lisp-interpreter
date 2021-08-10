@@ -4,12 +4,13 @@ Read from interpreter and convert into internal representation.
 
 whitespace = ['\n', '\t', ' ']
 
-def read():
+def read(prompt):
+    prompt = len(prompt)*'.'
     s = ''
     sentinel = '' 
     first = True
     while True:
-        line = input('' if first else '.... ')
+        line = input('' if first else prompt + ' ')
         s += line + '\n'
         for char in line:
             if char == ')':

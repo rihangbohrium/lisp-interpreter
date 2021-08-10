@@ -5,15 +5,14 @@ from eval import *
 from print import *
 import apply
 
-def repl(prompt='scm>'):
-    """
-    Base logic of interpreter, using Read-Eval-Print-Loop structure
-    """
+def repl(prompt='lisp>'):
+    print("""rb-lisp, a lisp language interpreter.\nGitHub: https://github.com/rihangbohrium/lisp-interpreter""")
+
+
     symbols = apply.get_globals()
-    prompt += ' '
     while True:
-        print(prompt, end='')
-        to_eval = read()
+        print(prompt, end=' ')
+        to_eval = read(prompt)
         for expr in to_eval:
             print(print_repr(evaluate(expr, symbols)))
 
