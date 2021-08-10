@@ -1,7 +1,9 @@
 from utils import *
 
 """
-Evaluate internal representation and apply methods within scope.
+Eval part of eval-apply mutually recursive structure. Eval takes lisp code
+and converts it to our internal representation (a python list). It applies the
+list using builtin functions written in apply.py, accessed using the symbol dict.
 """
 def search(symbols, symbol):
     parent = symbols['$parent']
@@ -22,6 +24,9 @@ def get(symbols, symbol):
         assert False, "symbol not found"
 
 def evaluate(s, symbols):
+    """
+    Evaluate internal representation by returning numbers or applying procedures.
+    """
     if (is_num(s)):
         return float(s)
     elif type(s) == str and search(symbols, s):
