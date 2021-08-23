@@ -5,7 +5,7 @@ import utils
 The apply part of eval-apply recursion construct. Contains python implementation for the
 Lisp builtin procedures. Because python does not allow circular imports, this file 
 imports eval.py, but eval.py does not import this, instead accessing these functions
-from global_symbols dict. 
+from global_symbols dict. Hi
 """
 
 def get_globals():
