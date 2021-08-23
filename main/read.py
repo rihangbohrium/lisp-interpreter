@@ -1,5 +1,7 @@
 """
 Read from interpreter and convert into internal representation.
+For example: the string '(+ 2 2)' should be converted to
+['+', 2.0, 2.0].
 """
 
 whitespace = ['\n', '\t', ' ']
