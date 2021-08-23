@@ -26,6 +26,8 @@ def get(symbols, symbol):
 def evaluate(s, symbols):
     """
     Evaluate internal representation by returning numbers or applying procedures.
+    Calls methods within apply by using the points to apply.py functions in the
+    globals dict.
     """
     if (is_num(s)):
         return float(s)

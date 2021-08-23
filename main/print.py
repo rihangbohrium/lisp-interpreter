@@ -2,7 +2,8 @@ from utils import is_num
 import types
 
 """
-Print portion of read-eval-print loop
+Print portion of read-eval-print loop. Converts internal representation (python list)
+into lisp code.
 """
 def print_repr(s):
     """

@@ -5,7 +5,7 @@ import utils
 The apply part of eval-apply recursion construct. Contains python implementation for the
 Lisp builtin procedures. Because python does not allow circular imports, this file 
 imports eval.py, but eval.py does not import this, instead accessing these functions
-from global_symbols dict. Hi
+from global_symbols dict.
 """
 
 def get_globals():
@@ -43,7 +43,11 @@ def divide(ops, symbols=None):
         r /= i
     return r
 
-def define(ops, symbols):            
+def define(ops, symbols):     
+    """
+    Use the define form to add a symbol into the symbols dict within scope
+    and attach it to a given value.
+    """       
     assert type(ops[0]) == str, print(ops)
     assert utils.valid_name(ops[0]), f'Name not valid: {ops[0]}'
     symbols[ops[0]] = evaluate(ops[1], symbols)
@@ -51,7 +55,9 @@ def define(ops, symbols):
 
 def lisp_lambda(ops, symbols):
     """
-    We do be dynamic scoping xDDDDDD
+    Returns a function that will accept parameters and attach them to
+    arguments. Uses dynamic scoping, so does not check body of function for
+    valid symbols initially.
     """
     declared_scope = {'$parent':symbols}
     vars = ops[0]
