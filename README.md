@@ -8,3 +8,6 @@ Uses the concept of the eval/apply mutual recursion structure, and Read-Eval-Pri
 ```
 python main/interpreter.py
 ```
+# Todo:
+- custom error catching
+- use define directly on a function, rather than requiring lambda
