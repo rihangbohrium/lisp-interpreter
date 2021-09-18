@@ -11,3 +11,4 @@ python main/interpreter.py
 # Todo:
 - custom error catching
 - use define directly on a function, rather than requiring lambda
+- add flag to read from file
